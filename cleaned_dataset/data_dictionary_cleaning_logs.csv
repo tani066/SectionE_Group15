@@ -1,0 +1,108 @@
+Data Dictionary,,,,,,
+Column Name,Description,Example,Data Type,Missing,Missing (%),Cleaning Required
+id,client loan application ID,26262,Number,0,0.00%,NO
+year,year of loan application,2019,Number,0,0.00%,NO
+loan_limit,"indicates whether the loan is conforming (cf) 
+or non-conforming (ncf)",cf,Text,603,2.41%,YES
+gender,"gender of the applicant (male, female, joint, sex not available)",Male,Text,0,0.00%,NO
+approv_in_adv,"indicates whether the loan was approved in advance (pre, nopre)",nopre,Text,166,0.66%,YES
+loan_type,"type of loan (type1, type2, type3)",type1,Text,0,0.00%,NO
+loan_purpose,"purpose of the loan (p1, p2, p3, p4)",p4,Text,20,0.08%,YES
+credit_worthiness,"credit worthiness (l1, l2)",l1,Text,0,0.00%,NO
+open_credit,"indicates whether the applicant has any open credit accounts
+(opc, nopc)",nopc,Text,0,0.00%,NO
+business_or_commercial,"indicates whether the loan is for business/commercial purposes
+(ob/c - business/commercial, nob/c - personal)",nob/c,Text,0,0.00%,NO
+loan_amount,amount of money being borrowed,396500,Number,0,0.00%,NO
+rate_of_interest,interest rate charged on the loan,3.99,Number,6070,24.28%,YES
+interest_rate_spread,"difference between the interest rate on the loan and a benchmark 
+interest rate",0.308,Number,6101,24.40%,YES
+upfront_charges,initial charges associated with securing the loan,3000,Number,6594,26.38%,YES
+term,duration of the loan in months,360,Number,8,0.03%,YES
+neg_ammortization,"indicates whether the loan allows for negative ammortization
+(neg_amm, not_neg)",not_neg,Text,25,0.10%,YES
+interest_only,"indicates whether the loan has an interest-only payment option 
+(int_only, not_int)",not_int,Text,0,0.00%,NO
+lump_sum_payment,"indicates if a lump sum payment is required at the end of the loan
+ term (lpsm, not_lpsm)",not_lpsm,Text,0,0.00%,NO
+property_value,value of the property being financed,418000,Number,2419,9.68%,YES
+construction_type,"type of construction (sb - site built, mh - manufactured home)",sb,Text,0,0.00%,NO
+occupancy_type,"occupancy type (pr - primary residence, sr- secondary residence, 
+ir - investment property)",pr,Text,0,0.00%,NO
+secured_by,"specifies the type of collateral securing the loan (home, land)",home,Text,0,0.00%,NO
+total_units,"number of units in the property being financed (1U, 2U, 3U, 4U)",1U,Text,0,0.00%,NO
+income,applicant's annual income,5700,Number,1558,6.23%,YES
+credit_type,"applicant's type of credit (CIB - credit information bureau , CRIF - 
+CIRF credit information bureau, EXP - experian , EQUI - equifax)",CRIF,Text,0,0.00%,NO
+credit_score,applicant's credit score,547,Number,0,0.00%,NO
+co-applicant_credit_type,"co-applicant's type of credit (CIB - credit information bureau 
+EXP - experian)",EXP,Text,0,0.00%,NO
+age,the age of the applicant,25-34,Text,31,0.12%,YES
+submission_of_application,"indicates how the application was submitted (to_inst - to institution,
+not_inst - not to institution)",to_inst,Text,31,0.12%,YES
+ltv,"loan-to-value ratio, calculated as the loan amount divided by the 
+property value",94.85645933,Number,2419,9.68%,YES
+region,"geographic region where the property is located (North, south, 
+central, North-East)",south,Text,0,0.00%,NO
+security_type,"type of security or collateral backing the loan (direct, indirect)",direct,Text,0,0.00%,NO
+status,indicates whether the loan has been defaulted (1) or not (0),0,Number,0,0.00%,NO
+dtir1,debt-to-income ratio,38,Number,3955,15.82%,YES
+,,,,,,
+Cleaning Logs,,,,,,
+Column Name,Issue,Action,,Reason,,
+id,No Issues,-,,-,,
+year,All values are the same,Drop the column,,There is nothing to analyze using the year column as it has the same values.,,
+loan_limit,603 missing values,"Replace all missing values with mode and 
+switch to upper case",,"Fill with mode because this is categorical data, and change the case to
+upper for consistency and readability.",,
+gender,No real meaning of 'joint' and 'sex not available',"Replace 'joint' and 'sex not available' with 
+'UNKNOWN' and switch to upper case",,"Joint' and 'Sex not available' don't really explain what they mean, so replace with
+unknown, and change case to upper for consistency and readability.",,
+approv_in_adv,166 missing values,"Replace all missing values with mode and 
+switch to upper case",,"Fill with mode because this is categorical data, and change the case to
+upper for consistency and readability.",,
+loan_type,"No real meaning to type1, type2 and type3",Drop the column,,Can't make an insight with this type of data.,,
+loan_purpose,"No real meaning to p1, p2, p3 and p4",Drop the column,,Can't make an insight with this type of data.,,
+credit_worthiness,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+open_credit,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+business_or_commercial,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+loan_amount,No Issues,-,,-,,
+rate_of_interest,6070 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+interest_rate_spread,6101 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+upfront_charges,6594 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+term,8 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+neg_ammortization,25 missing values,"Replace all missing values with mode and 
+switch to upper case",,"Fill with mode because this is categorical data, and change the case to
+upper for consistency and readability.",,
+interest_only,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+lump_sum_payment,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+property_value,2419 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+construction_type,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+occupancy_type,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+secured_by,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+total_units,No meaning to units in terms of loans,Drop the column,,"Can't make out what 1U, or 4U of loans would be.",,
+income,"1558 missing values, and outliers",Replace missing and outliers with median,,"Replace missing values with median because it is more robust and 
+can better handle values when compared to the mean. 
+Replace outliers with median, otherwise the data becomes skewed",,
+credit_type,No Issues,-,,-,,
+credit_score,No Issues,-,,-,,
+co-applicant_credit_type,No Issues,-,,-,,
+age,31 missing values,"Replace all missing values with mode and 
+switch to upper case",,"Fill with mode because this is categorical data, and change the case to
+upper for consistency and readability.",,
+submission_of_application,31 missing values,"Replace all missing values with mode and 
+switch to upper case",,"Fill with mode because this is categorical data, and change the case to
+upper for consistency and readability.",,
+ltv,2419 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
+region,No Issues,Upper case all values,,Upper case for consistency and readability.,,
+security_type,All values are the same,Drop the column,,"There is nothing to analyze using the security_type column as it has the same 
+values.",,
+status,Column name doesn't really explain what the column is,Rename the column to 'defaulted',,Rename from 'status' to 'defaulted' to indicate if the loan was defaulted or not.,,
+dtir1,3955 missing values,Replace all missing values with median,,"Replace missing values with median because it is more robust and can better
+handle outliers when compared to the mean.",,
