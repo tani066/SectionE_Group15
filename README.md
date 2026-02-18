@@ -5,7 +5,8 @@
 ## 📌 Project Overview
 This project analyzes loan application data to understand the key factors that influence loan default risk. The objective is to extract meaningful insights from borrower financial and demographic data and visualize them through a structured analytical dashboard.
 
-The original dataset contained **148,670 rows**, but due to Google Sheets cell limitations, it was reduced to **24,999 rows** for analysis and visualization.
+The original dataset contained **148,670 rows**, but due to Google Sheets cell limitations, it was randomized and reduced to **24,999 rows** for analysis and visualization. 
+The code for this is available in `random-sampler/main.py`.
 
 The dashboard helps answer questions such as:
 - Which borrowers are most likely to default?
