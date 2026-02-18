@@ -120,9 +120,9 @@ Interest-only and negative amortization loans show only small differences in def
 
 ```
 📦 Loan Default Dashboard
- ┣ 📊 Dashboard Screenshot
- ┣ 📑 Dataset (if included)
- ┗ 📄 README.md
+ ┣ 📊 Dashboard PDF, Presentation
+ ┣ 📑 Dataset,Calculations_Pivots
+ ┗ 📄 Documentation,README.md
 ```
 
 ---
@@ -133,14 +133,5 @@ Interest-only and negative amortization loans show only small differences in def
 2. Use filters to explore risk segments
 3. Analyze charts for insights
 4. Interpret KPIs for decision-making
-
----
-
-## 📌 Author
-
-**Shivansh Tiwari**
-Aspiring Data Scientist & Full Stack Developer
-
----
 
 ⭐ If you found this project useful, consider giving it a star!
