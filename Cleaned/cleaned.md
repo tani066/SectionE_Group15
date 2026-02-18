@@ -37,7 +37,7 @@ status | defaulted | Clear target variable name |
 
 All categorical columns were cleaned using:
 
-=UPPER(TRIM(A2))
+=UPPER(A2)
 
 Purpose:
 - remove extra spaces
