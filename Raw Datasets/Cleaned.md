@@ -1,58 +1,48 @@
 # 🧹 Data Cleaning & Preprocessing Log
 
-This document records all cleaning, preprocessing, and transformation steps performed on the dataset before analysis and dashboard creation.
+This document records all preprocessing, cleaning, and transformation steps applied to the dataset before analysis and dashboard creation.
 
 ---
 
 ## 📊 Dataset Overview
 - Original Rows: **148,670**
 - Working Rows: **24,999**
-- Goal: Prepare dataset for accurate analysis and visualization
+- Goal: Prepare dataset for reliable analysis and visualization.
 
 ---
 
-# 🧾 Column Cleaning Summary
+# 🗑 Dropped Columns
 
-## Dropped Columns
-The following columns were removed because they provided no analytical value:
+The following columns were removed due to lack of analytical value:
 
 | Column | Reason |
 |------|--------|
-year | Only one value present |
-loan_type | Encoded values not interpretable |
-loan_purpose | Encoded categories without meaning |
-total_units | Not relevant for analysis |
-security_type | Same value for all rows |
+year | Same value across all rows |
+loan_type | Encoded categories not interpretable |
+loan_purpose | Encoded values without meaning |
+total_units | Not relevant for risk analysis |
+security_type | Same value for entire column |
 
 ---
 
-## Renamed Columns
+# ✏ Column Renaming
+
 | Old Name | New Name | Reason |
 |---------|----------|-------|
-status | defaulted | Clear target meaning |
+status | defaulted | Clear target variable name |
 
 ---
 
-## Missing Value Handling Strategy
+# 🔤 Text Standardization
 
-| Data Type | Method | Reason |
-|----------|--------|-------|
-Categorical | Mode | Most frequent value best represents category |
-Numeric | Median | Resistant to outliers |
+All categorical columns were cleaned using:
 
----
-
-# 🔧 Column-Wise Cleaning Actions
-
-## Categorical Columns
-Standardized text values:
-
-- Converted to **UPPERCASE**
-- Trimmed extra spaces
-- Unified inconsistent categories
-
-Formula used:
 =UPPER(TRIM(A2))
+
+Purpose:
+- remove extra spaces
+- standardize case
+- avoid duplicate categories
 
 Columns standardized:
 - loan_limit
@@ -72,43 +62,61 @@ Columns standardized:
 
 ---
 
-### Special Category Fixes
+# 📊 Missing Value Treatment Strategy
 
-| Column | Issue | Action |
-|------|------|------|
-gender | joint / sex not available | replaced with UNKNOWN |
-
----
-
-## Numeric Columns — Missing Values
-
-Median imputation applied to:
-
-- rate_of_interest
-- interest_rate_spread
-- upfront_charges
-- term
-- property_value
-- income
-- ltv
-- dtir1
-
-Example formula:
-=IF(AE2="", MEDIAN(FILTER(AE:AE, ISNUMBER(AE:AE))), AE2)
+| Data Type | Method Used | Reason |
+|----------|-------------|-------|
+Categorical | Mode | Most frequent category best represents missing values |
+Numeric | Median | Robust against outliers |
 
 ---
 
-## Outlier Handling
+## 🟡 Mode Imputation Columns (Categorical)
 
-### Income Column
-Issues:
+The following columns had missing values replaced using **mode**:
+
+| Column | Missing Count | Action |
+|------|----------------|-------|
+loan_limit | 603 | Filled with mode |
+approv_in_adv | 166 | Filled with mode |
+neg_ammortization | 25 | Filled with mode |
+age | 31 | Filled with mode |
+submission_of_application | 31 | Filled with mode |
+
+Reason:  
+Mode imputation is appropriate for categorical variables because it preserves category distribution and avoids introducing artificial values.
+
+---
+
+## 🔵 Median Imputation Columns (Numeric)
+
+Median replacement was applied to:
+
+- rate_of_interest (6070 missing)
+- interest_rate_spread (6101 missing)
+- upfront_charges (6594 missing)
+- term (8 missing)
+- property_value (2419 missing)
+- income (1558 missing)
+- ltv (2419 missing)
+- dtir1 (3955 missing)
+
+Reason:  
+Median is resistant to extreme values and maintains realistic distributions.
+
+---
+
+# 📈 Outlier Handling
+
+## Income Column
+Issues detected:
 - missing values
 - invalid values (0)
 - extreme outliers
 
-Method:
-- Median imputation
-- IQR-based outlier replacement
+Method used:
+- median replacement
+- IQR outlier detection
 
 Formula used:
 =ARRAYFORMULA(IF(U2:U="","",
@@ -120,45 +128,39 @@ U2:U)))
 
 ---
 
-## Range Validation
+# 📏 Range Validation
 
-### Credit Score
-Valid range = **300–900**
+## Credit Score Range Enforcement
+Valid range: **300–900**
 
-Formula used:
+Formula:
 =MAX(300, MIN(900, C2))
 
 ---
 
-### LTV Ratio
-Valid range = **0–100**
-
-Steps:
-1. Replace missing values with median
-2. Clip values to valid range
+## LTV Range Enforcement
+Valid range: **0–100**
 
 Formula:
 =MAX(0, MIN(100, AA2))
 
 ---
 
-## Decimal Formatting
-Standardized numeric precision to **2 decimal places** for:
+# 🔢 Numeric Formatting
+The following columns were standardized to **2 decimal places**:
 
 - rate_of_interest
 - interest_rate_spread
 - upfront_charges
 - ltv
 
-Formatting applied:
-Format → Number → 2 decimal places
-
 ---
 
 # ⚙ Feature Engineering
 
 ## Credit Score Band Column
-A new column **credit_score_band** was created to group numeric credit scores into ranges:
+A new column **credit_score_band** was created to group credit scores into ranges:
+
 450–499
 500–549
 550–599
@@ -170,9 +172,9 @@ A new column **credit_score_band** was created to group numeric credit scores in
 851–900
 
 Purpose:
-- simplifies analysis
-- improves visualization
-- enables grouped comparisons
+- easier analysis
+- clearer charts
+- grouped comparisons
 
 ---
 
@@ -184,19 +186,17 @@ After preprocessing:
 ✔ Outliers corrected  
 ✔ Invalid ranges fixed  
 ✔ Categories standardized  
-✔ Columns cleaned and renamed  
+✔ Irrelevant columns removed  
 ✔ Dataset consistent and analysis-ready  
 
 ---
 
 # 📌 Conclusion
-The dataset is now:
+All preprocessing steps were designed to:
 
-- Clean
-- Structured
-- Consistent
-- Statistically reliable
-- Ready for visualization or machine learning
+- preserve data integrity
+- reduce noise
+- improve statistical reliability
+- ensure accurate analytical insights
 
-All preprocessing decisions were made to maximize analytical accuracy while preserving original data integrity wherever possible.
-
+The dataset is now clean, structured, and suitable for visualization, reporting, or machine learning workflows.
