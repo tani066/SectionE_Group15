@@ -128,24 +128,6 @@ U2:U)))
 
 ---
 
-# 📏 Range Validation
-
-## Credit Score Range Enforcement
-Valid range: **300–900**
-
-Formula:
-=MAX(300, MIN(900, C2))
-
----
-
-## LTV Range Enforcement
-Valid range: **0–100**
-
-Formula:
-=MAX(0, MIN(100, AA2))
-
----
-
 # 🔢 Numeric Formatting
 The following columns were standardized to **2 decimal places**:
 
@@ -198,5 +180,3 @@ All preprocessing steps were designed to:
 - reduce noise
 - improve statistical reliability
 - ensure accurate analytical insights
-
-The dataset is now clean, structured, and suitable for visualization, reporting, or machine learning workflows.
